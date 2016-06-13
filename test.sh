@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
-cd jigg
+cd jigg-develop
 sbt test
