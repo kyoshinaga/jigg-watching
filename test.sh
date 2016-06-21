@@ -2,7 +2,7 @@
 
 TAGGER_MODEL_NAME=tagger.ser.gz
 PARSER_MODEL_NAME=parser.ser.gz
-BEAM_SIZE=8
+BEAM_SIZE=4
 
 cd jigg-develop
 ./bin/sbt assembly
