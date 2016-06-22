@@ -3,6 +3,7 @@
 TAGGER_MODEL_NAME=tagger.ser.gz
 PARSER_MODEL_NAME=parser.ser.gz
 BEAM_SIZE=4
+TRAIN_SIZE=500
 
 cd jigg-develop
 
@@ -12,13 +13,13 @@ else
 				mkdir /work/result
 fi
 
-./bin/sbt assembly
+./bin/sbt clean assembly
 cd target
 
 # Super tagger training
 java -Xmx4g -cp *.jar jigg.nlp.ccg.TrainSuperTagger \
 				-bank.lang ja -bank.dir /data/ccgbank-20150216/ \
-				-bank.trainSize 100 \
+				-bank.trainSize $TRAIN_SIZE \
 				-model /work/result/$TAGGER_MODEL_NAME
 
 # Parser training
@@ -27,7 +28,7 @@ java -Xmx5g -cp *.jar jigg.nlp.ccg.TrainParser \
 				-model /work/result/$PARSER_MODEL_NAME \
 				-beam $BEAM_SIZE \
 				-bank.lang ja\
-				-bank.trainSize 100 \
+				-bank.trainSize $TRAIN_SIZE \
 				-bank.dir /data/ccgbank-20150216
 
 # Evaluation
