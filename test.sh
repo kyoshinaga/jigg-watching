@@ -3,7 +3,7 @@
 TAGGER_MODEL_NAME=tagger.ser.gz
 PARSER_MODEL_NAME=parser.ser.gz
 BEAM_SIZE=4
-TRAIN_SIZE=500
+TRAIN_SIZE=1000
 
 cd jigg-develop
 
@@ -14,6 +14,8 @@ else
 fi
 
 ./bin/sbt clean assembly
+./bin/sbt doc
+
 cd target
 
 # Super tagger training
