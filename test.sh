@@ -2,8 +2,8 @@
 
 TAGGER_MODEL_NAME=tagger.ser.gz
 PARSER_MODEL_NAME=parser.ser.gz
-BEAM_SIZE=4
-TRAIN_SIZE=1000
+BEAM_SIZE=8
+TRAIN_SIZE=5000
 
 cd jigg-develop
 

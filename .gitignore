@@ -1,2 +1,4 @@
 jigg-develop/
 *.log
+*.py
+*.swp
