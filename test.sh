@@ -5,7 +5,7 @@ PARSER_MODEL_NAME=parser.ser.gz
 BEAM_SIZE=2
 TRAIN_SIZE=10
 
-cd outputEvalAsXml
+cd jigg-develop
 
 if [ -e /work/result ]; then
 				echo "result directory exist."
