@@ -40,7 +40,10 @@ java -Xmx4g -cp *.jar jigg.nlp.ccg.EvalJapaneseParser \
 				-output /work/result/ \
 				-bank.dir /data/ccgbank-20150216 \
 				-useTest true \
-				-cabocha /data/test.cabocha
+				-cabocha /data/test.cabocha \
+				2>&1 | tee /tmp/eval.log.tmp
+
+awk '/:/{print}' /tmp/eval.log.tmp > /work/result/eval.log
 
 # Convert to CoNLL format
 java -cp *.jar jigg.nlp.ccg.Cabocha2CoNLL \

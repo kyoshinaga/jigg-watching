@@ -16,8 +16,3 @@ if __name__ == '__main__':
 
     print(args.beam)
 
-#    output = subprocess.check_output(
-#        'java -Xmx4g -cp %s jigg.nlp.ccg.EvalJapaneseParser \
-#        -model %s -decoder.beam %s -decoder.tagger.beta %s -output %s \
-#        -bank.dir %s -cabocha %s -preferConnected %s'
-#    )
