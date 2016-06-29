@@ -19,3 +19,6 @@ if __name__ == '__main__':
 
     print(args.inputEvalFile)
     print(args.beam)
+
+    output = subprocess.check_output('cat %s' % args.inputEvalFile)
+    print(output)
