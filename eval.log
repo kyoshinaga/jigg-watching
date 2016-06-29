@@ -1,0 +1,40 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Directory /work/result already exits; we override the contents.
+Loading parser model in /work/result/parser.ser.gz ...done [0.6 sec]
+0	/8948 have been processed.100	/8948 have been processed.200	/8948 have been processed.300	/8948 have been processed.400	/8948 have been processed.500	/8948 have been processed.600	/8948 have been processed.700	/8948 have been processed.800	/8948 have been processed.900	/8948 have been processed.1000	/8948 have been processed.1100	/8948 have been processed.1200	/8948 have been processed.1300	/8948 have been processed.1400	/8948 have been processed.1500	/8948 have been processed.1600	/8948 have been processed.1700	/8948 have been processed.1800	/8948 have been processed.1900	/8948 have been processed.2000	/8948 have been processed.2100	/8948 have been processed.2200	/8948 have been processed.2300	/8948 have been processed.2400	/8948 have been processed.2500	/8948 have been processed.2600	/8948 have been processed.2700	/8948 have been processed.2800	/8948 have been processed.2900	/8948 have been processed.3000	/8948 have been processed.3100	/8948 have been processed.3200	/8948 have been processed.3300	/8948 have been processed.3400	/8948 have been processed.3500	/8948 have been processed.3600	/8948 have been processed.3700	/8948 have been processed.3800	/8948 have been processed.3900	/8948 have been processed.4000	/8948 have been processed.4100	/8948 have been processed.4200	/8948 have been processed.4300	/8948 have been processed.4400	/8948 have been processed.4500	/8948 have been processed.4600	/8948 have been processed.4700	/8948 have been processed.4800	/8948 have been processed.4900	/8948 have been processed.5000	/8948 have been processed.5100	/8948 have been processed.5200	/8948 have been processed.5300	/8948 have been processed.5400	/8948 have been processed.5500	/8948 have been processed.5600	/8948 have been processed.5700	/8948 have been processed.5800	/8948 have been processed.5900	/8948 have been processed.6000	/8948 have been processed.6100	/8948 have been processed.6200	/8948 have been processed.6300	/8948 have been processed.6400	/8948 have been processed.6500	/8948 have been processed.6600	/8948 have been processed.6700	/8948 have been processed.6800	/8948 have been processed.6900	/8948 have been processed.7000	/8948 have been processed.7100	/8948 have been processed.7200	/8948 have been processed.7300	/8948 have been processed.7400	/8948 have been processed.7500	/8948 have been processed.7600	/8948 have been processed.7700	/8948 have been processed.7800	/8948 have been processed.7900	/8948 have been processed.8000	/8948 have been processed.8100	/8948 have been processed.8200	/8948 have been processed.8300	/8948 have been processed.8400	/8948 have been processed.8500	/8948 have been processed.8600	/8948 have been processed.8700	/8948 have been processed.8800	/8948 have been processed.8900	/8948 have been processed.
+parsing time: 60855ms; 149.1s/sec; 4052.5w/sec
+
+category accuracies:
+-----------------------
+token accuracy: 0.42983812594591037
+sentence accuracy: 0.003017434063477872
+
+dependency accuracies against CCGBank dependency:
+-----------------------
+bunsetsu accuracy: 0.160184 (11952/74614)
+sentence accuracy: 0.021010 (188/8948)
+Coverage of fully connected analysis (bunsetsu): 0.182137 (13590/74614)
+Coverage of fully connected analysis (sentence): 0.022463 (201/8948)
+active bunsetsu accuracy: 0.879470 (11952/13590)
+
+evaluation with modified derivations:
+bunsetsu accuracy: 0.640068 (47758/74614)
+sentence accuracy: 0.097564 (873/8948)
+Coverage of fully connected analysis (bunsetsu): 1.000000 (74614/74614)
+Coverage of fully connected analysis (sentence): 1.000000 (8948/8948)
+active bunsetsu accuracy: 0.640068 (47758/74614)
+bunsetsu accuracy: 0.164292 (9987/60788)
+sentence accuracy: 0.024419 (187/7658)
+Coverage of fully connected analysis (bunsetsu): 0.186731 (11351/60788)
+Coverage of fully connected analysis (sentence): 0.025986 (199/7658)
+active bunsetsu accuracy: 0.879834 (9987/11351)
+
+evaluation with modified derivations:
+bunsetsu accuracy: 0.642117 (39033/60788)
+sentence accuracy: 0.107861 (826/7658)
+Coverage of fully connected analysis (bunsetsu): 1.000000 (60788/60788)
+Coverage of fully connected analysis (sentence): 1.000000 (7658/7658)
+active bunsetsu accuracy: 0.642117 (39033/60788)
+
+Saving predicted bunsetsu dependencies to /work/result
+done
