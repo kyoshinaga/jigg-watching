@@ -4,21 +4,85 @@ import argparse
 import os
 import shutil
 import subprocess
+import re
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
+from xmljson import badgerfish as bf
+from json import dumps
+
+
+def prettify(elem):
+    rough_string = ET.tostring(elem, 'utf-8')
+    reparsed = minidom.parseString(rough_string)
+    return reparsed.toprettyxml(indent="  ")
+
+def trim(ar):
+    while ar.count("") > 0:
+        ar.remove("")
+    return ar
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='Generate evaluation result as xml/jsonj')
+    parser = argparse.ArgumentParser(description='Generate evaluation result as xml/json')
 
-    parser.add_argument('inputEvalFile', metavar='INPUT_EVAL_FILE', type=str,\
+    parser.add_argument('--inputEvalFile', metavar='INPUT_EVAL_FILE', type=str,\
                         help='Input file name of evalulation resuit, default ./eval.log',\
                         default="./eval.log")
+    parser.add_argument('--outputEvalDir', metavar='OUTPUT_EVAL_DIRECTORY', type=str, \
+                        help='Input file name of evalulation resuit, default ./', \
+                        default="./")
     parser.add_argument('beam', metavar='BEAM',type=int,\
                         help='Beam size')
 
     args = parser.parse_args()
 
-    print(args.inputEvalFile)
-    print(args.beam)
+    output = subprocess.check_output('cat %s' % args.inputEvalFile,shell=True)
+    result = output.split('\n')
 
-    output = subprocess.check_output('cat %s' % args.inputEvalFile)
-    print(output)
+    rootNode = ET.Element('root')
+
+    index = 0
+
+    while index < len(result):
+
+        line = result[index]
+
+        if line.startswith('category accuracies'):
+            catAccuracyNode = ET.SubElement(rootNode, line.split(':')[0].replace(' ','_'))
+            while line.strip():
+                if 'accuracy' in line:
+                    items = re.split(' |:',line)
+                    items = trim(items)
+                    tagName = items[0]
+                    ET.SubElement(catAccuracyNode,tagName).set(items[1],items[2].strip())
+                index += 1
+                line = result[index]
+
+        elif line.startswith('dependency accuracies against CCGBank dependency'):
+            depAccuracyNode = ET.SubElement(rootNode, line.split(':')[0].replace(' ','_'))
+            while line.strip():
+                if 'accuracy' in line:
+                    items = re.split('accuracy:|\(|\)', line)
+                    items = trim(items)
+                    tagName = items[0].strip().replace(' ','_')
+                    ET.SubElement(depAccuracyNode, tagName).set('accuracy',items[1].strip())
+                elif 'Coverage' in line:
+                    items = re.split(':|\(|\)', line)
+                    items = trim(items)
+                    tagName = items[0].strip().replace(' ','_')
+                    attrName = items[1]
+                    ET.SubElement(depAccuracyNode, tagName).set(attrName,items[2].strip())
+                index += 1
+                line = result[index]
+
+        index += 1
+
+    outxml = open(args.outputEvalDir + 'eval.xml','w')
+    outxml.write(prettify(rootNode))
+    outxml.close()
+
+    json = bf.data(rootNode)
+
+    outjson = open(args.outputEvalDir + 'eval.json','w')
+    outjson.write(dumps(json,sort_keys=True, indent=2))
+    outjson.close()
