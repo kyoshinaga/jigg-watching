@@ -77,13 +77,13 @@ if __name__ == '__main__':
 
         index += 1
 
-    outxml = open(args.outputEvalDir + 'eval.xml','w')
+    outxml = open(args.outputEvalDir + '/eval.xml','w')
     outxml.write(prettify(rootNode))
     outxml.close()
 
     json = bf.data(rootNode)
 
-    outjson = open(args.outputEvalDir + 'eval.json','w')
+    outjson = open(args.outputEvalDir + '/eval.json','w')
     outjson.write(dumps(json,sort_keys=True, indent=2))
     outjson.close()
 
