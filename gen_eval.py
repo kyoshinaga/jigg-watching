@@ -40,6 +40,7 @@ if __name__ == '__main__':
     result = output.split('\n')
 
     rootNode = ET.Element('root')
+    rootNodeForJson = ET.Element('root')
 
     index = 0
 
@@ -48,30 +49,38 @@ if __name__ == '__main__':
         line = result[index]
 
         if line.startswith('category accuracies'):
-            catAccuracyNode = ET.SubElement(rootNode, line.split(':')[0].replace(' ','_'))
+            tagName = line.split(':')[0].replace(' ','_')
+            catAccuracyNode = ET.SubElement(rootNode, tagName)
+            catAccuracyNodeJson = ET.SubElement(rootNodeForJson, tagName)
             while line.strip():
                 if 'accuracy' in line:
                     items = re.split(' |:',line)
                     items = trim(items)
                     tagName = items[0]
-                    ET.SubElement(catAccuracyNode,tagName).set(items[1],items[2].strip())
+                    ET.SubElement(catAccuracyNodeJson,tagName).set(items[1],items[2].strip())
+                    tagName = tagName + '_' + items[1]
+                    ET.SubElement(catAccuracyNode,tagName).text = items[2].strip()
                 index += 1
                 line = result[index]
 
         elif line.startswith('dependency accuracies against CCGBank dependency'):
-            depAccuracyNode = ET.SubElement(rootNode, line.split(':')[0].replace(' ','_'))
+            tagName = line.split(':')[0].replace(' ','_')
+            depAccuracyNode = ET.SubElement(rootNode, tagName)
+            depAccuracyNodeJson = ET.SubElement(rootNodeForJson, tagName)
             while line.strip():
                 if 'accuracy' in line:
-                    items = re.split('accuracy:|\(|\)', line)
-                    items = trim(items)
-                    tagName = items[0].strip().replace(' ','_')
-                    ET.SubElement(depAccuracyNode, tagName).set('accuracy',items[1].strip())
-                elif 'Coverage' in line:
                     items = re.split(':|\(|\)', line)
                     items = trim(items)
                     tagName = items[0].strip().replace(' ','_')
+                    ET.SubElement(depAccuracyNode, tagName).text = items[1].strip()
+                    ET.SubElement(depAccuracyNodeJson, tagName).set('accuracy',items[1].strip())
+                elif 'Coverage' in line:
+                    items = re.split(':|\(|\)', line)
+                    items = trim(items)
+                    tagName = items[0].strip().replace(' ','_') + '_' + items[1]
                     attrName = items[1]
-                    ET.SubElement(depAccuracyNode, tagName).set(attrName,items[2].strip())
+                    ET.SubElement(depAccuracyNodeJson, tagName).set(attrName,items[2].strip())
+                    ET.SubElement(depAccuracyNode, tagName).text = items[2].strip()
                 index += 1
                 line = result[index]
 
@@ -81,7 +90,7 @@ if __name__ == '__main__':
     outxml.write(prettify(rootNode))
     outxml.close()
 
-    json = bf.data(rootNode)
+    json = bf.data(rootNodeForJson)
 
     outjson = open(args.outputEvalDir + '/eval.json','w')
     outjson.write(dumps(json,sort_keys=True, indent=2))

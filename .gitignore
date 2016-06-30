@@ -1,3 +1,6 @@
 jigg-develop/
 result/
 *.swp
+*.xml
+*.json
+*.log
