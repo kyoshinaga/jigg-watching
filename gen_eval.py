@@ -69,12 +69,12 @@ if __name__ == '__main__':
             depAccuracyNodeJson = ET.SubElement(rootNodeForJson, tagName)
             while line.strip():
                 if line.startswith('bunsetsu accuracy') or \
-                    line.sartswith('sentence accuracy'):
-                    items = re.split(':|\(|\)', line)
-                    items = trim(items)
-                    tagName = items[0].strip().replace(' ','_')
-                    ET.SubElement(depAccuracyNode, tagName).text = items[1].strip()
-                    ET.SubElement(depAccuracyNodeJson, tagName).set('accuracy',items[1].strip())
+                   line.startswith('sentence accuracy'):
+                   items = re.split(':|\(|\)', line)
+                   items = trim(items)
+                   tagName = items[0].strip().replace(' ','_')
+                   ET.SubElement(depAccuracyNode, tagName).text = items[1].strip()
+                   ET.SubElement(depAccuracyNodeJson, tagName).set('accuracy',items[1].strip())
                 index += 1
                 line = result[index]
 
