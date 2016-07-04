@@ -68,19 +68,13 @@ if __name__ == '__main__':
             depAccuracyNode = ET.SubElement(rootNode, tagName)
             depAccuracyNodeJson = ET.SubElement(rootNodeForJson, tagName)
             while line.strip():
-                if 'accuracy' in line:
+                if line.startswith('bunsetsu accuracy') or \
+                    line.sartswith('sentence accuracy'):
                     items = re.split(':|\(|\)', line)
                     items = trim(items)
                     tagName = items[0].strip().replace(' ','_')
                     ET.SubElement(depAccuracyNode, tagName).text = items[1].strip()
                     ET.SubElement(depAccuracyNodeJson, tagName).set('accuracy',items[1].strip())
-                elif 'Coverage' in line:
-                    items = re.split(':|\(|\)', line)
-                    items = trim(items)
-                    tagName = items[0].strip().replace(' ','_') + '_' + items[1]
-                    attrName = items[1]
-                    ET.SubElement(depAccuracyNodeJson, tagName).set(attrName,items[2].strip())
-                    ET.SubElement(depAccuracyNode, tagName).text = items[2].strip()
                 index += 1
                 line = result[index]
 
