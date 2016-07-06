@@ -31,8 +31,6 @@ if __name__ == '__main__':
     parser.add_argument('--outputEvalDir', metavar='OUTPUT_EVAL_DIRECTORY', type=str, \
                         help='Input file name of evalulation resuit, default ./', \
                         default="./")
-    parser.add_argument('beam', metavar='BEAM',type=int, \
-                        help='Beam size')
 
     args = parser.parse_args()
 
